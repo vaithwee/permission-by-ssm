@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.vaith.permission.mapper.base.DeptMapperBaseMapper">
+
+
+    <insert id="insertDept"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `sys_dept`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+                    <if test="parentId!=null">
+                        `parent_id`,
+                    </if>
+                    <if test="level!=null">
+                        `level`,
+                    </if>
+                    <if test="seq!=null">
+                        `seq`,
+                    </if>
+                    <if test="remark!=null">
+                        `remark`,
+                    </if>
+                    <if test="operator!=null">
+                        `operator`,
+                    </if>
+                    <if test="operateIp!=null">
+                        `operate_ip`,
+                    </if>
+                    <if test="createTime!=null">
+                        `create_time`,
+                    </if>
+                    <if test="updateTime!=null">
+                        `update_time`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+                <if test="parentId!=null">
+                    #{parentId},
+                </if>
+                <if test="level!=null">
+                    #{level},
+                </if>
+                <if test="seq!=null">
+                    #{seq},
+                </if>
+                <if test="remark!=null">
+                    #{remark},
+                </if>
+                <if test="operator!=null">
+                    #{operator},
+                </if>
+                <if test="operateIp!=null">
+                    #{operateIp},
+                </if>
+                <if test="createTime!=null">
+                    #{createTime},
+                </if>
+                <if test="updateTime!=null">
+                    #{updateTime},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateDept">
+        UPDATE `sys_dept`
+        SET
+        <trim suffixOverrides=",">
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="parentId != null">
+                `parent_id` = #{parentId},
+            </if>
+            <if test="level != null and level!=''">
+                `level` = #{level},
+            </if>
+            <if test="seq != null">
+                `seq` = #{seq},
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark},
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator},
+            </if>
+            <if test="operateIp != null and operateIp!=''">
+                `operate_ip` = #{operateIp},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `sys_dept`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.name != null and set.name!=''">
+            `name` = #{set.name},
+        </if>
+        <if test="set.parentId != null">
+            `parent_id` = #{set.parentId},
+        </if>
+        <if test="set.level != null and set.level!=''">
+            `level` = #{set.level},
+        </if>
+        <if test="set.seq != null">
+            `seq` = #{set.seq},
+        </if>
+        <if test="set.remark != null and set.remark!=''">
+            `remark` = #{set.remark},
+        </if>
+        <if test="set.operator != null and set.operator!=''">
+            `operator` = #{set.operator},
+        </if>
+        <if test="set.operateIp != null and set.operateIp!=''">
+            `operate_ip` = #{set.operateIp},
+        </if>
+        <if test="set.createTime != null">
+            `create_time` = #{set.createTime},
+        </if>
+        <if test="set.updateTime != null">
+            `update_time` = #{set.updateTime},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.nameList != null">
+                    `name` in
+                    <foreach collection="where.nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyName!=null and where.fuzzyName.size()>0">
+                (
+                <foreach collection="where.fuzzyName"  separator="or" item="item">
+                    `Name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyName!=null and where.rightFuzzyName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyName"  separator="or" item="item">
+                    `Name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.parentIdList != null">
+                    `parent_id` in
+                    <foreach collection="where.parentIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.parentIdSt !=null">
+                `parent_id` >= #{where.parentIdSt} and
+            </if>
+            <if test="where.parentIdEd!=null">
+                `parent_id` &lt;= #{where.parentIdEd} and
+            </if>
+                <if test="where.levelList != null">
+                    `level` in
+                    <foreach collection="where.levelList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyLevel!=null and where.fuzzyLevel.size()>0">
+                (
+                <foreach collection="where.fuzzyLevel"  separator="or" item="item">
+                    `Level` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyLevel!=null and where.rightFuzzyLevel.size()>0">
+                (
+                <foreach collection="where.rightFuzzyLevel"  separator="or" item="item">
+                    `Level` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.seqList != null">
+                    `seq` in
+                    <foreach collection="where.seqList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.seqSt !=null">
+                `seq` >= #{where.seqSt} and
+            </if>
+            <if test="where.seqEd!=null">
+                `seq` &lt;= #{where.seqEd} and
+            </if>
+                <if test="where.remarkList != null">
+                    `remark` in
+                    <foreach collection="where.remarkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyRemark!=null and where.fuzzyRemark.size()>0">
+                (
+                <foreach collection="where.fuzzyRemark"  separator="or" item="item">
+                    `Remark` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyRemark!=null and where.rightFuzzyRemark.size()>0">
+                (
+                <foreach collection="where.rightFuzzyRemark"  separator="or" item="item">
+                    `Remark` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.operatorList != null">
+                    `operator` in
+                    <foreach collection="where.operatorList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyOperator!=null and where.fuzzyOperator.size()>0">
+                (
+                <foreach collection="where.fuzzyOperator"  separator="or" item="item">
+                    `Operator` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyOperator!=null and where.rightFuzzyOperator.size()>0">
+                (
+                <foreach collection="where.rightFuzzyOperator"  separator="or" item="item">
+                    `Operator` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.operateIpList != null">
+                    `operate_ip` in
+                    <foreach collection="where.operateIpList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyOperateIp!=null and where.fuzzyOperateIp.size()>0">
+                (
+                <foreach collection="where.fuzzyOperateIp"  separator="or" item="item">
+                    `Operate_ip` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyOperateIp!=null and where.rightFuzzyOperateIp.size()>0">
+                (
+                <foreach collection="where.rightFuzzyOperateIp"  separator="or" item="item">
+                    `Operate_ip` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.createTimeList != null">
+                    `create_time` in
+                    <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.createTimeSt !=null">
+                `create_time` >= #{where.createTimeSt} and
+            </if>
+            <if test="where.createTimeEd!=null">
+                `create_time` &lt;= #{where.createTimeEd} and
+            </if>
+                <if test="where.updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="where.updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.updateTimeSt !=null">
+                `update_time` >= #{where.updateTimeSt} and
+            </if>
+            <if test="where.updateTimeEd!=null">
+                `update_time` &lt;= #{where.updateTimeEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="xyz.vaith.permission.model.Dept" id="DeptMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="level" column="level"/>
+        <result property="seq" column="seq"/>
+        <result property="remark" column="remark"/>
+        <result property="operator" column="operator"/>
+        <result property="operateIp" column="operate_ip"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+    <select id="queryDept" resultMap="DeptMap">
+        select
+        <include refid="baseResult"></include>
+        from  `sys_dept`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="parentId != null">
+                `parent_id` = #{parentId} and
+            </if>
+            <if test="level != null and level!=''">
+                `level` = #{level} and
+            </if>
+            <if test="seq != null">
+                `seq` = #{seq} and
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark} and
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator} and
+            </if>
+            <if test="operateIp != null and operateIp!=''">
+                `operate_ip` = #{operateIp} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test = "(_parameter instanceof xyz.vaith.permission.model.Dept$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="parentIdList != null">
+                    `parent_id` in
+                    <foreach collection="parentIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="parentIdSt !=null">
+                    `parent_id` >= #{parentIdSt} and
+                </if>
+                <if test="parentIdEd!=null">
+                    `parent_id` &lt;= #{parentIdEd} and
+                </if>
+                <if test="levelList != null">
+                    `level` in
+                    <foreach collection="levelList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyLevel!=null and fuzzyLevel.size()>0">
+                    (
+                    <foreach collection="fuzzyLevel"  separator="or" item="item">
+                        `Level` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLevel!=null and rightFuzzyLevel.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLevel"  separator="or" item="item">
+                        `Level` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="seqList != null">
+                    `seq` in
+                    <foreach collection="seqList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="seqSt !=null">
+                    `seq` >= #{seqSt} and
+                </if>
+                <if test="seqEd!=null">
+                    `seq` &lt;= #{seqEd} and
+                </if>
+                <if test="remarkList != null">
+                    `remark` in
+                    <foreach collection="remarkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRemark!=null and fuzzyRemark.size()>0">
+                    (
+                    <foreach collection="fuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRemark!=null and rightFuzzyRemark.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="operatorList != null">
+                    `operator` in
+                    <foreach collection="operatorList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyOperator!=null and fuzzyOperator.size()>0">
+                    (
+                    <foreach collection="fuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperator!=null and rightFuzzyOperator.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="operateIpList != null">
+                    `operate_ip` in
+                    <foreach collection="operateIpList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyOperateIp!=null and fuzzyOperateIp.size()>0">
+                    (
+                    <foreach collection="fuzzyOperateIp"  separator="or" item="item">
+                        `Operate_ip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperateIp!=null and rightFuzzyOperateIp.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperateIp"  separator="or" item="item">
+                        `Operate_ip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="createTimeList != null">
+                    `create_time` in
+                    <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                <if test="updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryDeptLimit1" resultMap="DeptMap">
+        select
+        <include refid="baseResult"></include>
+        from  `sys_dept`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="parentId != null">
+                `parent_id` = #{parentId} and
+            </if>
+            <if test="level != null and level!=''">
+                `level` = #{level} and
+            </if>
+            <if test="seq != null">
+                `seq` = #{seq} and
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark} and
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator} and
+            </if>
+            <if test="operateIp != null and operateIp!=''">
+                `operate_ip` = #{operateIp} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test = "(_parameter instanceof xyz.vaith.permission.model.Dept$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="parentIdList != null">
+                        `parent_id` in
+                        <foreach collection="parentIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="parentIdSt !=null">
+                    `parent_id` >= #{parentIdSt} and
+                </if>
+                <if test="parentIdEd!=null">
+                    `parent_id` &lt;= #{parentIdEd} and
+                </if>
+                    <if test="levelList != null">
+                        `level` in
+                        <foreach collection="levelList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyLevel!=null and fuzzyLevel.size()>0">
+                    (
+                    <foreach collection="fuzzyLevel"  separator="or" item="item">
+                        `Level` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLevel!=null and rightFuzzyLevel.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLevel"  separator="or" item="item">
+                        `Level` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="seqList != null">
+                        `seq` in
+                        <foreach collection="seqList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="seqSt !=null">
+                    `seq` >= #{seqSt} and
+                </if>
+                <if test="seqEd!=null">
+                    `seq` &lt;= #{seqEd} and
+                </if>
+                    <if test="remarkList != null">
+                        `remark` in
+                        <foreach collection="remarkList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRemark!=null and fuzzyRemark.size()>0">
+                    (
+                    <foreach collection="fuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRemark!=null and rightFuzzyRemark.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="operatorList != null">
+                        `operator` in
+                        <foreach collection="operatorList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyOperator!=null and fuzzyOperator.size()>0">
+                    (
+                    <foreach collection="fuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperator!=null and rightFuzzyOperator.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="operateIpList != null">
+                        `operate_ip` in
+                        <foreach collection="operateIpList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyOperateIp!=null and fuzzyOperateIp.size()>0">
+                    (
+                    <foreach collection="fuzzyOperateIp"  separator="or" item="item">
+                        `Operate_ip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperateIp!=null and rightFuzzyOperateIp.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperateIp"  separator="or" item="item">
+                        `Operate_ip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="createTimeList != null">
+                        `create_time` in
+                        <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                    <if test="updateTimeList != null">
+                        `update_time` in
+                        <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `name`,
+        `parent_id`,
+        `level`,
+        `seq`,
+        `remark`,
+        `operator`,
+        `operate_ip`,
+        `create_time`,
+        `update_time`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof xyz.vaith.permission.model.Dept$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.parentId==true">
+                        `parent_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.level==true">
+                        `level`,
+                    </if>
+                    <if test="fetchFields.fetchFields.seq==true">
+                        `seq`,
+                    </if>
+                    <if test="fetchFields.fetchFields.remark==true">
+                        `remark`,
+                    </if>
+                    <if test="fetchFields.fetchFields.operator==true">
+                        `operator`,
+                    </if>
+                    <if test="fetchFields.fetchFields.operateIp==true">
+                        `operate_ip`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createTime==true">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updateTime==true">
+                        `update_time`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.parentId==null">
+                        `parent_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.level==null">
+                        `level`,
+                    </if>
+                    <if test="fetchFields.excludeFields.seq==null">
+                        `seq`,
+                    </if>
+                    <if test="fetchFields.excludeFields.remark==null">
+                        `remark`,
+                    </if>
+                    <if test="fetchFields.excludeFields.operator==null">
+                        `operator`,
+                    </if>
+                    <if test="fetchFields.excludeFields.operateIp==null">
+                        `operate_ip`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createTime==null">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updateTime==null">
+                        `update_time`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof xyz.vaith.permission.model.Dept$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
