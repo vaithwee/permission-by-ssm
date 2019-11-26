@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for sya_acl
 -- ----------------------------
 DROP TABLE IF EXISTS `sya_acl`;
-CREATE TABLE `sya_acl`
+CREATE TABLE `sys_acl`
 (
     `id`            INT(11)                                                NOT NULL AUTO_INCREMENT COMMENT '权限id',
     `code`          VARCHAR(255)                                           NOT NULL DEFAULT '' COMMENT '权限代码',
@@ -31,7 +31,7 @@ CREATE TABLE `sya_acl`
     `type`          INT(11)                                                NOT NULL DEFAULT '0' COMMENT '权限类型 | 0: 其他 1: 菜单 2: 链接',
     `status`        INT(11)                                                NOT NULL DEFAULT '1' COMMENT '权限状态 | 0: 冻结 1: 正常',
     `seq`           INT(11)                                                NOT NULL DEFAULT '0' COMMENT '权限排序',
-    `reamark`       VARCHAR(255)                                                    DEFAULT NULL COMMENT '备注',
+    `remark`       VARCHAR(255)                                                    DEFAULT NULL COMMENT '备注',
     `operator`      VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '操作者',
     `operate_timer` DATETIME                                               NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次操作时间',
     `operate_ip`    VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '最后一次更新操作者的ip',
