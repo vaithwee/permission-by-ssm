@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.vaith.pmbssm.mapper.SysRoleAclMapper">
+  <resultMap id="BaseResultMap" type="xyz.vaith.pmbssm.model.SysRoleAcl">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="acl_id" jdbcType="INTEGER" property="aclId" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_timer" jdbcType="TIMESTAMP" property="operateTimer" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, role_id, acl_id, `operator`, operate_timer, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_acl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role_acl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="xyz.vaith.pmbssm.model.SysRoleAcl" useGeneratedKeys="true">
+    insert into sys_role_acl (role_id, acl_id, `operator`, 
+      operate_timer, operate_ip)
+    values (#{roleId,jdbcType=INTEGER}, #{aclId,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTimer,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="xyz.vaith.pmbssm.model.SysRoleAcl" useGeneratedKeys="true">
+    insert into sys_role_acl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="aclId != null">
+        acl_id,
+      </if>
+      <if test="operator != null">
+        `operator`,
+      </if>
+      <if test="operateTimer != null">
+        operate_timer,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="aclId != null">
+        #{aclId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTimer != null">
+        #{operateTimer,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.vaith.pmbssm.model.SysRoleAcl">
+    update sys_role_acl
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="aclId != null">
+        acl_id = #{aclId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        `operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTimer != null">
+        operate_timer = #{operateTimer,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.vaith.pmbssm.model.SysRoleAcl">
+    update sys_role_acl
+    set role_id = #{roleId,jdbcType=INTEGER},
+      acl_id = #{aclId,jdbcType=INTEGER},
+      `operator` = #{operator,jdbcType=VARCHAR},
+      operate_timer = #{operateTimer,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

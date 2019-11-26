@@ -1,50 +1,43 @@
 package xyz.vaith.pmbssm.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * sys_acl
+ * sys_acl_module
  * @author 
  */
-public class SysAcl implements Serializable {
+@Data
+public class SysAclModule implements Serializable {
     /**
-     * 权限id
+     * 权限模块id
      */
     private Integer id;
 
     /**
-     * 权限代码
-     */
-    private String code;
-
-    /**
-     * 权限名称
+     * 权限模块名称
      */
     private String name;
 
     /**
-     * 权限模块id
+     * 上层权限模块id
      */
-    private Integer aclModuleId;
+    private Integer parentId;
 
     /**
-     * 权限链接
+     * 权限模块层级
      */
-    private String url;
+    private String level;
 
     /**
-     * 权限类型 | 0: 其他 1: 菜单 2: 链接
-     */
-    private Integer type;
-
-    /**
-     * 权限状态 | 0: 冻结 1: 正常
+     * 权限模块状态 | 0: 冻结 1: 正常
      */
     private Integer status;
 
     /**
-     * 权限排序
+     * 权限模块排序
      */
     private Integer seq;
 
@@ -69,5 +62,6 @@ public class SysAcl implements Serializable {
     private String operateIp;
 
     private static final long serialVersionUID = 1L;
+
 
 }
