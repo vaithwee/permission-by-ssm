@@ -13,9 +13,14 @@
     <context:annotation-config />
     <mvc:annotation-driven />
     
+    <mvc:interceptors>
+        <bean class="xyz.vaith.pmbssm.interceptor.HttpInterceptor" />
+    </mvc:interceptors>
+    
     <context:component-scan base-package="xyz.vaith.pmbssm.controller" />
     <context:component-scan base-package="xyz.vaith.pmbssm.service" />
 
+    <bean class="xyz.vaith.pmbssm.util.ApplicationContextHelper" lazy-init="false" />
     <bean class="xyz.vaith.pmbssm.exception.PermissionManagerExceptionResolver" />
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />

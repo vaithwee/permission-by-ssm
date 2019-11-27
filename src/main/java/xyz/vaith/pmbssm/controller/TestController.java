@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.vaith.pmbssm.enums.ResultCode;
 import xyz.vaith.pmbssm.exception.PermissionException;
+import xyz.vaith.pmbssm.mapper.SysAclModuleMapper;
+import xyz.vaith.pmbssm.model.SysAclModule;
 import xyz.vaith.pmbssm.model.TestVo;
 import xyz.vaith.pmbssm.model.common.JsonData;
+import xyz.vaith.pmbssm.util.ApplicationContextHelper;
 import xyz.vaith.pmbssm.validate.BeanValidator;
 
 import java.util.Collections;
@@ -46,6 +49,9 @@ public class TestController {
             code.setMessage(message);
             return JsonData.fail(code);
         }
+        SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
+        SysAclModule sysAclModule = moduleMapper.selectByPrimaryKey(1);
+        log.info("sysAclModule : {}" , sysAclModule);
         return JsonData.success(testVo);
     }
 }
