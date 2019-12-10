@@ -1,8 +1,11 @@
-package xyz.vaith.pmbssm.validate;
+package xyz.vaith.pmbssm.util;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.collections4.MapUtils;
+import xyz.vaith.pmbssm.enums.ResultCode;
+import xyz.vaith.pmbssm.exception.PermissionException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -49,6 +52,15 @@ public class BeanValidator {
         }
     }
 
+
+    public static void check(Object param) throws PermissionException {
+        Map<String, String> map = BeanValidator.validateObject(param);
+        if (!MapUtils.isEmpty(map)) {
+            ResultCode code = ResultCode.PARAM_ERROR;
+            code.setMessage(map.toString());
+            throw new PermissionException(code);
+        }
+    }
 
 
 

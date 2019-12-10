@@ -1,4 +1,4 @@
-package xyz.vaith.pmbssm.interceptor;
+package xyz.vaith.pmbssm.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

@@ -1,4 +1,4 @@
-package xyz.vaith.pmbssm.model;
+package xyz.vaith.pmbssm.param;
 
 import lombok.Data;
 

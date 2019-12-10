@@ -14,7 +14,7 @@
     <mvc:annotation-driven />
     
     <mvc:interceptors>
-        <bean class="xyz.vaith.pmbssm.interceptor.HttpInterceptor" />
+        <bean class="xyz.vaith.pmbssm.util.HttpInterceptor" />
     </mvc:interceptors>
     
     <context:component-scan base-package="xyz.vaith.pmbssm.controller" />
