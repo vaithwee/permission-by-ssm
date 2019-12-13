@@ -1,6 +1,7 @@
 package xyz.vaith.pmbssm.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
         super.preHandle(request, response, handler);
         String url = request.getRequestURI().toString();
         Map parameterMap = request.getParameterMap();
-        log.info("request start | url : {}, params : {}", url, parameterMap);
+        log.info("request start | url : {}, params : {}", url, MapUtil.toJsonString(parameterMap));
         request.setAttribute(START_TIME, System.currentTimeMillis());
         return true;
     }

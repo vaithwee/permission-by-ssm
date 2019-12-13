@@ -12,6 +12,7 @@ import xyz.vaith.pmbssm.util.LevelUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SysDeptServiceImpl implements SysDeptService {
@@ -27,9 +28,15 @@ public class SysDeptServiceImpl implements SysDeptService {
             code.setMessage("exist dept name in same level");
             throw new PermissionException(code);
         }
-        SysDept dept = SysDept.builder().name(param.getName()).parentId(param.getParentId()).seq(param.getSeq()).remark(param.getRemark()).level(LevelUtil.calculateLevel(getDeptLevel(param.getParentId()), param.getParentId())).operator("system").operateTimer(new Date()).build();
-        sysDeptMapper.insertSelective(dept);
-        return dept;
+        SysDept dept = SysDept.builder().name(param.getName()).parentId(param.getParentId()).seq(param.getSeq())
+                .remark(param.getRemark())
+                .level(LevelUtil.calculateLevel(getDeptLevel(param.getParentId()), param.getParentId()))
+                .operator("system").operateTimer(new Date()).build();
+        int result = sysDeptMapper.insertSelective(dept);
+        if (result > 0) {
+            return dept;
+        }
+        throw new PermissionException(ResultCode.SYSTEM_ERROR);
     }
 
     @Override
@@ -45,4 +52,12 @@ public class SysDeptServiceImpl implements SysDeptService {
         }
         return dept.getLevel();
     }
+
+    @Override
+    public List<SysDept> getDetpList() {
+      
+        return null;
+    }
+
+    
 }
