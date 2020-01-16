@@ -5,7 +5,8 @@ import java.util.Date;
 
 /**
  * sys_role_user
- * @author 
+ *
+ * @author
  */
 public class SysRoleUser implements Serializable {
     /**

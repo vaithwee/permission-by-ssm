@@ -38,7 +38,7 @@ public class TestController {
     @ResponseBody
     public JsonData validate(TestVo testVo) {
         Map<String, String> result = BeanValidator.validate(testVo);
-        if (result !=null && result.entrySet().size() > 0) {
+        if (result != null && result.entrySet().size() > 0) {
             String message = "";
             for (Map.Entry<String, String> entry : result.entrySet()) {
                 message += entry.getKey() + ":" + entry.getValue() + "  ";
@@ -49,7 +49,7 @@ public class TestController {
         }
         SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
         SysAclModule sysAclModule = moduleMapper.selectByPrimaryKey(1);
-        log.info("sysAclModule : {}" , sysAclModule);
+        log.info("sysAclModule : {}", sysAclModule);
         return JsonData.success(testVo);
     }
 }

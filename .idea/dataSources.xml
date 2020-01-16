@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/pmbssm</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="pmbssm@localhost [2]" uuid="c4e13717-593a-4ec1-b9cc-9a6e09b41734">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/pmbssm</jdbc-url>
+    </data-source>
   </component>
 </project>

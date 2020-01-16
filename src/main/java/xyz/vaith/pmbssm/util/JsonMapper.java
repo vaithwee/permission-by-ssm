@@ -10,7 +10,8 @@ import org.codehaus.jackson.type.TypeReference;
 @Slf4j
 public class JsonMapper {
     private static ObjectMapper objectMapper = new ObjectMapper();
-    static  {
+
+    static {
         objectMapper.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);
         objectMapper.setFilters(new SimpleFilterProvider().setFailOnUnknownId(false));
@@ -22,7 +23,7 @@ public class JsonMapper {
         }
         try {
             return src instanceof String ? (String) src : objectMapper.writeValueAsString(src);
-        } catch (Exception e){
+        } catch (Exception e) {
             log.warn("parse object to string exception, error: {}", e);
             return null;
         }

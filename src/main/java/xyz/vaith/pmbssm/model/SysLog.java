@@ -5,7 +5,8 @@ import java.util.Date;
 
 /**
  * sys_log
- * @author 
+ *
+ * @author
  */
 public class SysLog implements Serializable {
     /**

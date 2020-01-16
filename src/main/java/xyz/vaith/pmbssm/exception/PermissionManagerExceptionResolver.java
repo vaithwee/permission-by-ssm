@@ -16,16 +16,16 @@ public class PermissionManagerExceptionResolver implements HandlerExceptionResol
         log.error(e.getMessage());
         if (url.endsWith(".json")) {
             if (e instanceof PermissionException) {
-                JsonData jsonData = JsonData.fail(((PermissionException)e).getCode());
+                JsonData jsonData = JsonData.fail(((PermissionException) e).getCode());
                 mv = new ModelAndView("jsonView", jsonData.toMap());
-            } else  {
+            } else {
                 JsonData jsonData = JsonData.fail(ResultCode.SYSTEM_ERROR);
                 mv = new ModelAndView("jsonView", jsonData.toMap());
             }
         } else if (url.endsWith(".page")) {
             JsonData jsonData = JsonData.fail(ResultCode.SYSTEM_ERROR);
             mv = new ModelAndView("exception", jsonData.toMap());
-        } else  {
+        } else {
             JsonData jsonData = JsonData.fail(ResultCode.SYSTEM_ERROR);
             mv = new ModelAndView("jsonView", jsonData.toMap());
         }

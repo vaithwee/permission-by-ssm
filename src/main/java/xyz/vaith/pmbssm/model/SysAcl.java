@@ -5,7 +5,8 @@ import java.util.Date;
 
 /**
  * sys_acl
- * @author 
+ *
+ * @author
  */
 public class SysAcl implements Serializable {
     /**

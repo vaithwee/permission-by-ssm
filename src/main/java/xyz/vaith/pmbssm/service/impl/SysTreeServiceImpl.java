@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 @Service
 public class SysTreeServiceImpl implements SysTreeService {
 
@@ -34,7 +35,7 @@ public class SysTreeServiceImpl implements SysTreeService {
     }
 
     public List<DeptLevelDto> deptListToTree(List<DeptLevelDto> deptLevelDtoList) {
-        if(CollectionUtils.isEmpty(deptLevelDtoList)) {
+        if (CollectionUtils.isEmpty(deptLevelDtoList)) {
             return new ArrayList<>();
         }
         ArrayListMultimap<String, DeptLevelDto> multimap = ArrayListMultimap.create();
@@ -45,12 +46,7 @@ public class SysTreeServiceImpl implements SysTreeService {
                 rootList.add(dto);
             }
         }
-        Collections.sort(rootList, new Comparator<DeptLevelDto>() {
-            @Override
-            public int compare(DeptLevelDto o1, DeptLevelDto o2) {
-                return  o1.getSeq() - o2.getSeq();
-            }
-        });
+        Collections.sort(rootList, Comparator.comparingInt(SysDept::getSeq));
         transformDeptTree(rootList, LevelUtil.ROOT, multimap);
         return rootList;
     }
@@ -61,12 +57,7 @@ public class SysTreeServiceImpl implements SysTreeService {
             String nextLevel = LevelUtil.calculateLevel(level, dto.getId());
             List<DeptLevelDto> temp = levelMap.get(nextLevel);
             if (CollectionUtils.isNotEmpty(temp)) {
-                Collections.sort(temp, new Comparator<DeptLevelDto>() {
-                    @Override
-                    public int compare(DeptLevelDto o1, DeptLevelDto o2) {
-                        return  o1.getSeq() - o2.getSeq();
-                    }
-                });
+                Collections.sort(temp, Comparator.comparingInt(SysDept::getSeq));
                 dto.setDeptList(temp);
                 transformDeptTree(temp, nextLevel, levelMap);
             }

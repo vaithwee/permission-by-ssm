@@ -9,7 +9,7 @@ public class LevelUtil {
     public static String calculateLevel(String parentLevel, int parentId) {
         if (StringUtils.isBlank(parentLevel)) {
             return ROOT;
-        } else  {
+        } else {
             return StringUtils.join(parentLevel, SEPARATOR, parentId);
         }
     }

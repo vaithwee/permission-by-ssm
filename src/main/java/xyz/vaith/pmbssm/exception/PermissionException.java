@@ -6,7 +6,7 @@ import xyz.vaith.pmbssm.enums.ResultCode;
 
 @Getter
 public class PermissionException extends RuntimeException {
-    
+
     private ResultCode code;
 
     public PermissionException(ResultCode code) {

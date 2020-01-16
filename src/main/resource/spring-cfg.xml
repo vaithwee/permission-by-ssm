@@ -10,23 +10,23 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:annotation-config />
-    <mvc:annotation-driven />
-    
-    <mvc:interceptors>
-        <bean class="xyz.vaith.pmbssm.util.HttpInterceptor" />
-    </mvc:interceptors>
-    
-    <context:component-scan base-package="xyz.vaith.pmbssm.controller" />
-    <context:component-scan base-package="xyz.vaith.pmbssm.service" />
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
 
-    <bean class="xyz.vaith.pmbssm.util.ApplicationContextHelper" lazy-init="false" />
-    <bean class="xyz.vaith.pmbssm.exception.PermissionManagerExceptionResolver" />
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
-    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+    <mvc:interceptors>
+        <bean class="xyz.vaith.pmbssm.util.HttpInterceptor"/>
+    </mvc:interceptors>
+
+    <context:component-scan base-package="xyz.vaith.pmbssm.controller"/>
+    <context:component-scan base-package="xyz.vaith.pmbssm.service"/>
+
+    <bean class="xyz.vaith.pmbssm.util.ApplicationContextHelper" lazy-init="false"/>
+    <bean class="xyz.vaith.pmbssm.exception.PermissionManagerExceptionResolver"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 </beans>

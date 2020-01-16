@@ -16,12 +16,12 @@ import java.util.*;
 public class BeanValidator {
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
-    public static <T>Map<String, String>validate(T t, Class... groups) {
+    public static <T> Map<String, String> validate(T t, Class... groups) {
         Validator validator = validatorFactory.getValidator();
         Set<ConstraintViolation<T>> result = validator.validate(t, groups);
         if (result.isEmpty()) {
             return Collections.emptyMap();
-        } else  {
+        } else {
             LinkedHashMap errors = Maps.newLinkedHashMap();
             Iterator<ConstraintViolation<T>> iterator = result.iterator();
             while (iterator.hasNext()) {
@@ -44,10 +44,10 @@ public class BeanValidator {
         return errors;
     }
 
-    public static Map<String, String> validateObject(Object first, Object...objects) {
-        if (objects !=null && objects.length >0) {
+    public static Map<String, String> validateObject(Object first, Object... objects) {
+        if (objects != null && objects.length > 0) {
             return validateList(Lists.asList(first, objects));
-        } else  {
+        } else {
             return validate(first, new Class[0]);
         }
     }
@@ -61,7 +61,6 @@ public class BeanValidator {
             throw new PermissionException(code);
         }
     }
-
 
 
 }

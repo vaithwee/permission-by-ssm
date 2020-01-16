@@ -13,23 +13,25 @@ public enum ResultCode {
             return "system error";
         }
     },
-    NO_AUTH(2){
+    NO_AUTH(2) {
         @Override
         public String msg() {
             return "you don't have permission";
         }
     },
-    PARAM_ERROR(3)
-    ;
+    PARAM_ERROR(3);
 
     private Integer code;
     private String message;
+
     public void setMessage(String message) {
         this.message = message;
     }
+
     public String msg() {
         return message;
     }
+
     public Integer getCode() {
         return code;
     }

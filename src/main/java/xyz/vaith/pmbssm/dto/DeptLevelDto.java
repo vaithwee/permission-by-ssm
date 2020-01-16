@@ -11,10 +11,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeptLevelDto  extends SysDept{
+public class DeptLevelDto extends SysDept {
     private List<DeptLevelDto> deptList = new ArrayList<>();
 
-    public static  DeptLevelDto adapt(SysDept dept) {
+    public static DeptLevelDto adapt(SysDept dept) {
         DeptLevelDto dto = new DeptLevelDto();
         BeanUtils.copyProperties(dept, dto);
         return dto;

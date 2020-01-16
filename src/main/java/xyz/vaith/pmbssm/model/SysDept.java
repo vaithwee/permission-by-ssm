@@ -10,7 +10,8 @@ import java.util.Date;
 
 /**
  * sys_dept
- * @author 
+ *
+ * @author
  */
 @Data
 @Builder
